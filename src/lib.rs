@@ -1,6 +1,9 @@
-use std::{collections::HashMap, io::Write};
-
-use syn::{Attribute, Item, ItemEnum, ItemFn, ItemStatic, ItemStruct, ItemType, ItemUnion};
+pub use proc_bindgen_macro::*;
+use std::{
+    collections::HashMap,
+    io::{Read, Write},
+};
+use syn::{Attribute, File, Item, ItemEnum, ItemFn, ItemStatic, ItemStruct, ItemType, ItemUnion};
 
 #[derive(Default)]
 pub struct BindgenBuilder {
@@ -77,6 +80,10 @@ impl BindgenBuilder {
             .insert(attr.to_owned(), Box::new(gen_func));
         self
     }
+
+    pub fn build(self) -> ProcBindgen {
+        self.bindgen
+    }
 }
 
 pub type StructGen = Box<dyn for<'a> Fn(&'a ItemStruct) -> String>;
@@ -114,9 +121,16 @@ impl ProcBindgen {
         self
     }
     pub fn output<S: Into<String>>(self, filename: S) {
-        let mut output = std::fs::File::open(filename.into()).unwrap();
+        let mut output = std::fs::File::create(filename.into()).unwrap();
         for input in self.inputs {
-            let file = syn::parse_file(&input).unwrap();
+            let file_string = std::fs::read_to_string(Into::<String>::into(input)).unwrap();
+            let mut source = file_string.as_str();
+            if source.starts_with("#!") && !source.starts_with("#![") {
+                let shebang_end = source.find('\n').unwrap_or(source.len());
+                source = &source[shebang_end..];
+            }
+            proc_macro2::fallback::force();
+            let file: File = syn::parse_str(source).unwrap();
             for item in file.items {
                 match &item {
                     Item::Struct(item) => {

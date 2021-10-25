@@ -7,4 +7,5 @@ edition = "2018"
 
 [dependencies]
 syn = {version = "1.0.80", features = [ "full", "extra-traits" ]}
-proc-macro2 = "1.0.29"
+proc-macro2 = { version = "1.0.29", features = ["span-locations"] }
+proc-bindgen-macro = { path ="./proc-bindgen-macro" }

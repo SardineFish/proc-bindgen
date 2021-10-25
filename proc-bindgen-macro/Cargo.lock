@@ -3,15 +3,6 @@
 version = 3
 
 [[package]]
-name = "proc-bindgen"
-version = "0.1.0"
-dependencies = [
- "proc-bindgen-macro",
- "proc-macro2",
- "syn",
-]
-
-[[package]]
 name = "proc-bindgen-macro"
 version = "0.1.0"
 dependencies = [

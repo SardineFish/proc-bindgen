@@ -3,6 +3,14 @@
 version = 3
 
 [[package]]
+name = "gen"
+version = "0.1.0"
+dependencies = [
+ "proc-bindgen",
+ "syn",
+]
+
+[[package]]
 name = "proc-bindgen"
 version = "0.1.0"
 dependencies = [
