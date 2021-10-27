@@ -96,12 +96,12 @@ fn push_token<T: ToString>(stream: &mut Vec<ProcCode>, token_span: Span, token: 
 
     match last {
         Some(ProcCode::String(str, span)) => {
-            println!(
-                "push {:?} at {:?} into {:?}",
-                token.to_string(),
-                token_span,
-                span
-            );
+            // println!(
+            //     "push {:?} at {:?} into {:?}",
+            //     token.to_string(),
+            //     token_span,
+            //     span
+            // );
             str.push_str(&spaces_between(span, &token_span));
             str.push_str(&token.to_string());
             *span = span.join(token_span.into());
@@ -139,14 +139,14 @@ fn spaces_between(from: &Span, to: &Span) -> String {
     let mut spaces = String::new();
 
     if start.line == end.line {
-        for col in start.column..end.column {
+        for _col in start.column..end.column {
             spaces.push_str(" ");
         }
     } else {
-        for line in start.line..end.line {
+        for _line in start.line..end.line {
             spaces.push_str("\r\n");
         }
-        for col in 0..end.column {
+        for _col in 0..end.column {
             spaces.push_str(" ");
         }
     }

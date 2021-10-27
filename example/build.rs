@@ -1,7 +1,7 @@
-use gen::MyProcBindgen;
+use my_gen::MyProcBindgen;
 
 fn main() {
-    MyProcBindgen::new()
+    MyProcBindgen::create()
         .input("src/main.rs")
         .output("src/binding.hpp");
 

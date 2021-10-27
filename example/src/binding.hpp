@@ -1,5 +1,6 @@
-template <>
-void App::push_event<Foo>(Foo event)
-{
-    __app_push_event_Foo(this, event);
-}
+void do_with_Foo(App* app, Foo obj);
+
+         template<>
+         void App::do_with<Foo>(Foo obj) {
+             do_with_Foo(this, event);
+         }

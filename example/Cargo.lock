@@ -6,14 +6,12 @@ version = 3
 name = "example"
 version = "0.1.0"
 dependencies = [
- "gen",
- "proc-bindgen",
+ "my_gen",
  "proc-bindgen-macro",
- "syn",
 ]
 
 [[package]]
-name = "gen"
+name = "my_gen"
 version = "0.1.0"
 dependencies = [
  "proc-bindgen",

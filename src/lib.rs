@@ -1,8 +1,5 @@
 pub use proc_bindgen_macro::*;
-use std::{
-    collections::HashMap,
-    io::{Read, Write},
-};
+use std::{collections::HashMap, io::Write};
 use syn::{Attribute, File, Item, ItemEnum, ItemFn, ItemStatic, ItemStruct, ItemType, ItemUnion};
 
 #[derive(Default)]
